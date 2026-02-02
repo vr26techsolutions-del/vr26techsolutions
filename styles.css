@@ -705,6 +705,9 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     transition: all 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .contact-method:hover {
@@ -1039,4 +1042,30 @@ html {
     .services h2, .about h2, .contact h2 {
         font-size: 1.875rem;
     }
+}
+
+.contact-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-link:hover {
+    color: var(--accent-color);
+}
+
+.contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.contact-link:hover::after {
+    width: 100%;
 }

@@ -21,21 +21,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission
+// Form submission - Opens Gmail with pre-filled message
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-    };
-    
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    contactForm.reset();
-});
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // Create email body
+        const emailBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+        
+        // Open Gmail compose with pre-filled data
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=vr26techsolutions@gmail.com&su=New Contact Form Submission&body=${emailBody}`;
+        
+        window.open(gmailUrl, '_blank');
+        
+        // Show success message
+        alert('Gmail will open in a new tab. Please click Send to complete your message.');
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
 
 // Navbar scroll effect
 let lastScroll = 0;
